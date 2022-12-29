@@ -1,0 +1,25 @@
+# Import necessary libraries
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import SVC
+
+# Define the reviews and their corresponding labels
+reviews = ["This is a positive review", "This is a negative review"]
+labels = [1, 0]
+
+# Create a TfidfVectorizer to extract features from the reviews
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(reviews)
+
+# Create an SVC classifier
+classifier = SVC()
+
+# Train the classifier using the reviews and labels
+classifier.fit(X, labels)
+
+# Test the classifier with a new review
+test_review = "This is a neutral review"
+test_review_features = vectorizer.transform([test_review])
+prediction = classifier.predict(test_review_features)[0]
+
+# Print the prediction
+print(prediction)
