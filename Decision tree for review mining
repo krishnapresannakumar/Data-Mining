@@ -1,0 +1,28 @@
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+
+# Load the data into a pandas DataFrame
+df = pd.read_csv("reviews.csv")
+
+# Extract the features and labels from the DataFrame
+X = df["review"]  # features
+y = df["label"]  # labels
+
+# Split the data into a training set and a test set
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a DecisionTreeClassifier model
+model = DecisionTreeClassifier()
+
+# Train the model on the training data
+model.fit(X_train, y_train)
+
+# Test the model on the test data
+accuracy = model.score(X_test, y_test)
+print(f"Test accuracy: {accuracy:.2f}")
+
+# Use the model to predict labels for new reviews
+new_reviews = ["This product is great!", "I don't like this product"]
+predictions = model.predict(new_reviews)
+print(f"Predictions: {predictions}")
